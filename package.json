@@ -1,0 +1,31 @@
+{
+    "name": "macos-safari-clone",
+    "version": "1.0.0",
+    "description": "A macOS Safari clone with advanced web scraping capabilities",
+    "main": "proxy-server.js",
+    "scripts": {
+        "start": "node proxy-server.js",
+        "dev": "nodemon proxy-server.js",
+        "install-deps": "npm install"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "cors": "^2.8.5",
+        "puppeteer": "^21.6.1",
+        "axios": "^1.6.2",
+        "cheerio": "^1.0.0-rc.12",
+        "http-proxy-middleware": "^2.0.6"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.2"
+    },
+    "keywords": [
+        "macos",
+        "safari",
+        "web-scraping",
+        "puppeteer",
+        "proxy"
+    ],
+    "author": "Kiro IDE",
+    "license": "MIT"
+}

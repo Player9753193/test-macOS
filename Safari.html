@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta charset="UTF-8">
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<b id="desktop">
+
+    <div id="menu-bar">
+        <div class="menu-bar-left">
+            <span class="menu-item apple-logo"></span>
+            <span class="menu-item app-name">Finder</span>
+            <span class="menu-item">文件</span>
+            <span class="menu-item">编辑</span>
+            <span class="menu-item">查看</span>
+            <span class="menu-item">前往</span>
+            <span class="menu-item">窗口</span>
+            <span class="menu-item">帮助</span>
+        </div>
+
+        <div class="menu-bar-right">
+            <span class="status-item">Wi-Fi</span>
+            <span class="status-item">电池</span>
+            <span class="status-item control-center">CC</span>
+            <span class="status-item" id="current-time">16:44</span>
+        </div>
+    </div>
+
+    <div id="dock">
+        <div class="dock-app" data-app="finder">
+            <img src="assets/img/icon/finder-icon.png" alt="Finder">
+            <div class="dock-label">访达</div>
+        </div>
+        <div class="dock-app" data-app="safari">
+            <img src="assets/img/icon/safari-icon.png" alt="Safari">
+            <div class="dock-label">Safari浏览器</div>
+        </div>
+        <div class="dock-app" data-app="mail">
+            <img src="assets/img/icon/mail-icon.png" alt="Mail">
+            <div class="dock-label">邮件</div>
+        </div>
+        <div class="dock-divider"></div>
+        <div class="dock-app" data-app="trash">
+            <img src="assets/img/icon/trash-icon.png" alt="Trash Bin">
+            <div class="dock-label">废纸篓</div>
+        </div>
+    </div>
+    <div id="finder-window" class="window" data-app="finder" style="left: 150px; top: 100px;">
+        <div class="window-title-bar">
+            <div class="window-controls">
+                <div class="control-btn close-btn"></div>
+                <div class="control-btn minimize-btn"></div>
+                <div class="control-btn maximize-btn"></div>
+            </div>
+            <span class="window-title">Finder</span>
+        </div>
+
+        <div class="window-content">
+            <div class="sidebar">
+                <p>收藏夹</p>
+                <ul>
+                    <li class="active">桌面</li>
+                    <li>文稿</li>
+                    <li>下载</li>
+                </ul>
+                <p>iCloud</p>
+                <ul>
+                    <li>iCloud 云盘</li>
+                </ul>
+            </div>
+            <div class="main-content">
+                <div class="file-item">
+                    <img src="folder-icon.png" alt="文件夹">
+                    <span>项目源码</span>
+                </div>
+                <div class="file-item">
+                    <img src="document-icon.png" alt="文件">
+                    <span>README.md</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="safari-window" class="window" data-app="safari" style="left: 200px; top: 150px; display: none;">
+
+        <div class="window-title-bar">
+            <div class="window-controls">
+                <div class="control-btn close-btn"></div>
+                <div class="control-btn minimize-btn"></div>
+                <div class="control-btn maximize-btn"></div>
+            </div>
+            <span class="window-title">Safari</span>
+        </div>
+
+        <div class="safari-toolbar">
+            <div class="nav-buttons">
+                <span class="nav-btn back-btn">◀</span>
+                <span class="nav-btn forward-btn">▶</span>
+            </div>
+
+            <div class="address-bar-container">
+                <input type="text" class="address-bar" value="https://www.apple.com/macos-clone">
+                <span class="address-icon">🔍</span>
+            </div>
+
+            <div class="toolbar-spacer"></div>
+            <span class="toolbar-icon share-icon">⏏</span>
+        </div>
+
+        <div class="window-content safari-content">
+            <div id="safari-content-container">
+                <div id="safari-loading" class="safari-loading">
+                    <div class="loading-spinner"></div>
+                    <p>正在加载...</p>
+                </div>
+                <iframe id="safari-iframe" 
+                        src="about:blank" 
+                        frameborder="0" 
+                        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation"
+                        style="width: 100%; height: 100%; border: none; display: none;">
+                </iframe>
+                <div id="safari-proxy-content" class="safari-proxy-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mail-window" class="window" data-app="mail" style="left: 250px; top: 200px; display: none;">
+        <div class="window-title-bar">
+            <div class="window-controls">
+                <div class="control-btn close-btn"></div>
+                <div class="control-btn minimize-btn"></div>
+                <div class="control-btn maximize-btn"></div>
+            </div>
+            <span class="window-title">邮件</span>
+        </div>
+
+        <div class="mail-toolbar">
+            <div class="mail-toolbar-left">
+                <button class="mail-btn primary">新建邮件</button>
+                <button class="mail-btn">获取邮件</button>
+            </div>
+            <div class="mail-toolbar-center">
+                <div class="search-container">
+                    <input type="text" class="mail-search" placeholder="搜索邮件">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </div>
+            <div class="mail-toolbar-right">
+                <button class="mail-btn">删除</button>
+                <button class="mail-btn">回复</button>
+            </div>
+        </div>
+
+        <div class="window-content mail-content">
+            <div class="mail-sidebar">
+                <div class="mailbox-section">
+                    <h3>邮箱</h3>
+                    <ul class="mailbox-list">
+                        <li class="mailbox-item active">
+                            <span class="mailbox-icon">📥</span>
+                            <span class="mailbox-name">收件箱</span>
+                            <span class="unread-count">3</span>
+                        </li>
+                        <li class="mailbox-item">
+                            <span class="mailbox-icon">📤</span>
+                            <span class="mailbox-name">已发送</span>
+                        </li>
+                        <li class="mailbox-item">
+                            <span class="mailbox-icon">📝</span>
+                            <span class="mailbox-name">草稿</span>
+                            <span class="unread-count">1</span>
+                        </li>
+                        <li class="mailbox-item">
+                            <span class="mailbox-icon">🗑️</span>
+                            <span class="mailbox-name">废纸篓</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="account-section">
+                    <h3>账户</h3>
+                    <ul class="account-list">
+                        <li class="account-item">
+                            <span class="account-icon">📧</span>
+                            <span class="account-name">iCloud</span>
+                        </li>
+                        <li class="account-item">
+                            <span class="account-icon">📧</span>
+                            <span class="account-name">Gmail</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mail-list">
+                <div class="mail-list-header">
+                    <h2>收件箱</h2>
+                    <span class="mail-count">3 封邮件</span>
+                </div>
+                
+                <div class="mail-items">
+                    <div class="mail-item unread active">
+                        <div class="mail-sender">Apple</div>
+                        <div class="mail-subject">欢迎使用 macOS Ventura</div>
+                        <div class="mail-preview">感谢您升级到 macOS Ventura。探索全新功能，让您的 Mac 体验更上一层楼...</div>
+                        <div class="mail-time">上午 10:30</div>
+                    </div>
+                    
+                    <div class="mail-item unread">
+                        <div class="mail-sender">GitHub</div>
+                        <div class="mail-subject">您的仓库有新的 Pull Request</div>
+                        <div class="mail-preview">用户 @developer 向您的仓库 macOS-clone 提交了一个新的 Pull Request...</div>
+                        <div class="mail-time">昨天</div>
+                    </div>
+                    
+                    <div class="mail-item unread">
+                        <div class="mail-sender">Kiro IDE</div>
+                        <div class="mail-subject">欢迎使用 Kiro IDE</div>
+                        <div class="mail-preview">开始您的开发之旅，体验智能代码编辑和AI助手功能...</div>
+                        <div class="mail-time">2天前</div>
+                    </div>
+                    
+                    <div class="mail-item">
+                        <div class="mail-sender">Apple Developer</div>
+                        <div class="mail-subject">Xcode 更新可用</div>
+                        <div class="mail-preview">Xcode 14.3 现已可用，包含最新的 iOS 16.4 SDK...</div>
+                        <div class="mail-time">1周前</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mail-detail">
+                <div class="mail-detail-header">
+                    <div class="mail-detail-subject">欢迎使用 macOS Ventura</div>
+                    <div class="mail-detail-meta">
+                        <div class="mail-detail-sender">
+                            <strong>Apple</strong> &lt;noreply@apple.com&gt;
+                        </div>
+                        <div class="mail-detail-time">今天 上午 10:30</div>
+                    </div>
+                </div>
+                
+                <div class="mail-detail-content">
+                    <div class="mail-body">
+                        <h2>欢迎使用 macOS Ventura</h2>
+                        <p>感谢您升级到 macOS Ventura。这个版本带来了许多令人兴奋的新功能：</p>
+                        
+                        <ul>
+                            <li><strong>台前调度</strong> - 全新的多任务处理方式</li>
+                            <li><strong>连续互通相机</strong> - 将 iPhone 用作 Mac 的网络摄像头</li>
+                            <li><strong>邮件搜索</strong> - 更智能、更准确的搜索结果</li>
+                            <li><strong>Safari 共享标签页组</strong> - 与他人协作浏览</li>
+                        </ul>
+                        
+                        <p>探索这些功能，让您的 Mac 体验更上一层楼。</p>
+                        
+                        <p>祝好，<br>Apple 团队</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</b>
+</body>
+<script src="script.js">
+
+</script>
+
+</html>
