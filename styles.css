@@ -1,0 +1,1122 @@
+/* 全局重置，移除默认边距和填充，设置更现代的盒模型 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 移除滚动条，使整个页面充满视口 */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* 关键：模拟桌面环境，禁止页面滚动 */
+}
+
+/* 桌面容器样式 - macOS Ventura 13 浅色模式 */
+#desktop {
+    width: 100%;
+    height: 100%;
+
+    /* macOS Ventura 13 默认壁纸色调 */
+    background: linear-gradient(135deg, #e8f4fd 0%, #c7e9ff 25%, #a8d8ff 50%, #8cc8ff 75%, #70b8ff 100%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    padding-top: 24px;
+}
+
+/* 桌面图标占位符样式 */
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.desktop-icon img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    /* 模拟应用图标的圆角 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.desktop-icon span {
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    /* 模拟文本阴影，使其在深色背景上可见 */
+}
+
+/* 菜单栏容器 - macOS Ventura 13 浅色模式 */
+#menu-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 24px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+
+    color: #1d1d1f;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 400;
+    z-index: 1000;
+}
+
+/* 菜单项基础样式 */
+.menu-bar-left,
+.menu-bar-right {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.menu-item,
+.status-item {
+    padding: 0 8px;
+    line-height: 24px;
+    cursor: default;
+    transition: background-color 0.1s;
+    border-radius: 4px;
+}
+
+/* 鼠标悬停效果 - macOS Ventura 13 浅色模式 */
+.menu-item:hover,
+.status-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* 特殊菜单项样式 */
+.apple-logo {
+    font-size: 16px;
+    margin-right: 5px;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+.app-name {
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+/* 程序坞样式 - macOS Ventura 13 浅色模式 */
+#dock {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    margin-bottom: 8px;
+
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-radius: 16px;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 0 0 0 0.5px rgba(255, 255, 255, 0.8) inset;
+
+    z-index: 999;
+}
+
+/* 程序坞图标样式 */
+.dock-app img {
+    width: 55px;
+    height: 55px;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.2s ease-out;
+}
+
+.dock-divider {
+    width: 1px;
+    height: 35px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 0 10px;
+}
+
+/* 磁性放大效果 (基础版) */
+.dock-app:hover img {
+    transform: scale(1.3);
+}
+
+/* 窗口基础样式 - macOS Ventura 13 浅色模式 */
+.window {
+    position: absolute;
+    width: 700px;
+    height: 450px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    z-index: 50;
+}
+
+/* 窗口标题栏 - macOS Ventura 13 浅色模式 */
+.window-title-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    padding: 0 12px;
+    cursor: grab;
+    user-select: none;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+}
+
+.window-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1d1d1f;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 窗口控制按钮容器 */
+.window-controls {
+    position: absolute;
+    left: 10px;
+    display: flex;
+    gap: 7px;
+}
+
+/* 窗口控制按钮 - macOS Ventura 13 浅色模式 */
+.control-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 0.5px solid rgba(0, 0, 0, 0.08);
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+/* 按钮颜色 - macOS Ventura 13 精确色彩 */
+.close-btn {
+    background-color: #ff5f57;
+    border-color: rgba(255, 95, 87, 0.3);
+}
+
+.minimize-btn {
+    background-color: #ffbd30;
+    border-color: rgba(255, 189, 48, 0.3);
+}
+
+.maximize-btn {
+    background-color: #28ca42;
+    border-color: rgba(40, 202, 66, 0.3);
+}
+
+/* 悬停效果 */
+.control-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 窗口内容区域 - 通用基础设置 */
+.window-content {
+    width: 100%;
+    background-color: transparent;
+    /* 默认透明，显示窗口的毛玻璃背景 */
+}
+
+/* 【Finder 专属布局】 */
+#finder-window .window-content {
+    display: flex;
+    /* Finder 需要 Flex 布局来并排侧边栏和主内容 */
+    height: calc(100% - 32px);
+    /* 减去标题栏高度 */
+}
+
+/* 模拟 Finder 侧边栏 - macOS Ventura 13 浅色模式 */
+.sidebar {
+    width: 180px;
+    padding: 12px 8px;
+    border-right: 0.5px solid rgba(0, 0, 0, 0.08);
+    font-size: 13px;
+    color: #1d1d1f;
+    background-color: rgba(248, 248, 248, 0.8);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+}
+
+.sidebar p {
+    font-weight: 600;
+    color: #6e6e73;
+    margin-top: 12px;
+    padding: 4px 12px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 6px 12px;
+    margin: 1px 0;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+.sidebar li:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.sidebar li.active {
+    background-color: #007aff;
+    color: white;
+    font-weight: 500;
+}
+
+
+/* Finder 主内容区：文件图标布局 - macOS Ventura 13 浅色模式 */
+.main-content {
+    flex-grow: 1;
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.file-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.file-item img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 5px;
+}
+
+.file-item span {
+    font-size: 11px;
+    text-align: center;
+    word-break: break-all;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 3px;
+    padding: 1px 3px;
+}
+
+.file-item:hover span {
+    background-color: #007aff;
+    color: white;
+}
+
+/* 窗口最大化/全屏样式 */
+.window.maximized {
+    border-radius: 0;
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+
+/* -------------------- SAFARI 专属样式 -------------------- */
+
+/* Safari 工具栏样式 - macOS Ventura 13 浅色模式 */
+.safari-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    padding: 0 12px;
+    background-color: rgba(248, 248, 248, 0.9);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* 导航按钮组 */
+.nav-buttons {
+    display: flex;
+    gap: 2px;
+}
+
+.nav-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #1d1d1f;
+    transition: all 0.15s ease;
+    font-weight: 500;
+}
+
+.nav-btn:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
+.nav-btn:active {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(0.95);
+}
+
+/* 地址栏容器 - 负责居中 */
+.address-bar-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 40px;
+    position: relative;
+}
+
+/* 地址栏输入框 - macOS Ventura 13 浅色模式 */
+.address-bar {
+    width: 100%;
+    max-width: 600px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    padding: 0 12px 0 36px;
+    font-size: 13px;
+    background-color: rgba(255, 255, 255, 0.8);
+    outline: none;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    color: #1d1d1f;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+    transition: all 0.15s ease;
+}
+
+.address-bar:focus {
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3), 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+}
+
+/* 地址栏图标 (模拟锁或搜索图标) - macOS Ventura 13 浅色模式 */
+.address-icon {
+    position: absolute;
+    left: 12px;
+    color: #6e6e73;
+    font-size: 14px;
+}
+
+/* 工具栏右侧图标 */
+.toolbar-icon {
+    font-size: 18px;
+    color: #444;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.1s;
+}
+
+.toolbar-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Safari 内容区域 - macOS Ventura 13 浅色模式 */
+.window-content.safari-content {
+    height: calc(100% - 32px - 48px) !important;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+/* Safari 内容容器样式 */
+#safari-content-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 0 12px 12px;
+}
+
+/* Safari 加载动画 */
+.safari-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: none;
+}
+
+.safari-loading.show {
+    display: block;
+}
+
+.loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007aff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 12px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.safari-loading p {
+    color: #6e6e73;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Safari iframe 样式 */
+#safari-iframe {
+    border-radius: 0 0 12px 12px;
+}
+
+/* Safari 代理内容容器 */
+.safari-proxy-content {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    display: none;
+}
+
+
+
+.dock-divider {
+    width: 1px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.15);
+    margin: 0 8px;
+    border-radius: 0.5px;
+    flex-shrink: 0;
+}
+
+/* 废纸篓图标的特殊样式 */
+.trash-app img {
+    opacity: 0.9;
+}
+
+/* 磁性放大效果 (基础版) - 适用于所有 dock-app */
+.dock-app:hover img {
+    transform: scale(1.3);
+}
+
+/* 浮动标签的小箭头 (使用 ::after 伪元素) */
+.dock-label::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    /* 箭头位于标签下方 */
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    /* 旋转 45 度形成三角形 */
+
+    /* 匹配标签背景颜色 */
+    background-color: rgba(60, 60, 60, 0.95);
+
+    /* 箭头尺寸 */
+    width: 10px;
+    height: 10px;
+}
+
+/* 鼠标悬停时显示标签 */
+.dock-app:hover .dock-label {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 浮动标签基础样式 */
+.dock-label {
+    position: absolute;
+    top: -45px;
+    /* 将标签定位在图标上方 */
+    /* 由于图标会放大，这个数值可能需要根据实际图标大小微调 */
+
+    padding: 5px 10px;
+    background-color: rgba(60, 60, 60, 0.95);
+    /* 深色半透明背景 */
+    color: white;
+    font-size: 13px;
+    border-radius: 6px;
+
+    /* 水平居中 */
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* 默认隐藏，使用 opacity 和 visibility 实现平滑过渡 */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    /* 确保它不影响鼠标事件 */
+
+    transition: opacity 0.2s ease, transform 0.2s ease;
+
+    /* 确保标签在图标上方 */
+    z-index: 1001;
+}
+
+/*
+ 添加窗口打开/关闭动画 */
+.window {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.window.opening {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.window.closing {
+    transition: opacity 0.3s ease, transform 0.3s ease !important;
+}
+
+/* 改进的 Dock 应用图标样式 */
+.dock-app {
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.dock-app img {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Dock 应用标签 */
+.dock-app .dock-label {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    z-index: 1001;
+}
+
+.dock-app:hover .dock-label {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 改进的文件项样式 */
+.file-item {
+    transition: all 0.15s ease;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.file-item:hover {
+    background-color: rgba(0, 122, 255, 0.1);
+}
+
+.file-item span {
+    color: #1d1d1f;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+}
+
+.file-item:hover span {
+    background-color: #007aff;
+    color: white;
+    border-radius: 4px;
+}
+
+/* 窗口阴影聚焦效果 */
+.window.focused {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), 0 0 0 0.5px rgba(0, 0, 0, 0.15);
+}
+
+/* 特殊的苹果logo样式 */
+.apple-logo {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* 状态栏图标样式改进 */
+.status-item {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* 改进窗口最大化样式 */
+.window.maximized {
+    position: fixed !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    transition: all 0.3s ease;
+    top: 24px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: calc(100vh - 24px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    z-index: 100 !important;
+}
+
+/* 工具栏图标改进 */
+.toolbar-icon {
+    font-size: 16px;
+    color: #1d1d1f;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+}
+
+.toolbar-icon:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
+/* 导航按钮禁用状态 */
+.nav-btn:disabled,
+.nav-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.nav-btn:disabled:hover,
+.nav-btn.disabled:hover {
+    background-color: transparent;
+}
+
+/* 滚动条样式 (WebKit) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* ==================== 邮件应用样式 ==================== */
+
+/* 邮件工具栏 */
+.mail-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 44px;
+    padding: 0 12px;
+    background-color: rgba(248, 248, 248, 0.9);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.mail-toolbar-left,
+.mail-toolbar-right {
+    display: flex;
+    gap: 8px;
+}
+
+.mail-toolbar-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+/* 邮件按钮 */
+.mail-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #1d1d1f;
+}
+
+.mail-btn:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
+.mail-btn.primary {
+    background-color: #007aff;
+    color: white;
+}
+
+.mail-btn.primary:hover {
+    background-color: #0056cc;
+}
+
+/* 邮件搜索框 */
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+}
+
+.mail-search {
+    width: 100%;
+    height: 28px;
+    padding: 0 12px 0 32px;
+    border: none;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    outline: none;
+    transition: all 0.15s ease;
+}
+
+.mail-search:focus {
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3);
+}
+
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6e6e73;
+    font-size: 12px;
+}
+
+/* 邮件内容区域 */
+.mail-content {
+    display: flex;
+    height: calc(100% - 32px - 44px) !important;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* 邮件侧边栏 */
+.mail-sidebar {
+    width: 200px;
+    background-color: rgba(248, 248, 248, 0.8);
+    border-right: 0.5px solid rgba(0, 0, 0, 0.08);
+    padding: 12px 8px;
+    overflow-y: auto;
+}
+
+.mailbox-section,
+.account-section {
+    margin-bottom: 20px;
+}
+
+.mailbox-section h3,
+.account-section h3 {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6e6e73;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    padding: 0 12px;
+}
+
+.mailbox-list,
+.account-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mailbox-item,
+.account-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 13px;
+    margin: 1px 0;
+}
+
+.mailbox-item:hover,
+.account-item:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.mailbox-item.active {
+    background-color: #007aff;
+    color: white;
+}
+
+.mailbox-icon,
+.account-icon {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.mailbox-name,
+.account-name {
+    flex: 1;
+    font-weight: 400;
+}
+
+.unread-count {
+    background-color: #ff3b30;
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 16px;
+    text-align: center;
+}
+
+.mailbox-item.active .unread-count {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 邮件列表 */
+.mail-list {
+    width: 320px;
+    border-right: 0.5px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.mail-list-header {
+    padding: 16px;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.mail-list-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin: 0 0 4px 0;
+}
+
+.mail-count {
+    font-size: 13px;
+    color: #6e6e73;
+}
+
+.mail-items {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.mail-item {
+    padding: 12px 16px;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    position: relative;
+}
+
+.mail-item:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.mail-item.active {
+    background-color: #007aff;
+    color: white;
+}
+
+.mail-item.unread {
+    background-color: rgba(0, 122, 255, 0.05);
+}
+
+.mail-item.unread.active {
+    background-color: #007aff;
+}
+
+.mail-item.unread::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background-color: #007aff;
+    border-radius: 50%;
+}
+
+.mail-item.unread.active::before {
+    background-color: white;
+}
+
+.mail-sender {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 2px;
+    color: #1d1d1f;
+}
+
+.mail-item.active .mail-sender {
+    color: white;
+}
+
+.mail-subject {
+    font-weight: 500;
+    font-size: 13px;
+    margin-bottom: 4px;
+    color: #1d1d1f;
+}
+
+.mail-item.active .mail-subject {
+    color: white;
+}
+
+.mail-preview {
+    font-size: 12px;
+    color: #6e6e73;
+    line-height: 1.3;
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.mail-item.active .mail-preview {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.mail-time {
+    font-size: 11px;
+    color: #6e6e73;
+    text-align: right;
+}
+
+.mail-item.active .mail-time {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 邮件详情 */
+.mail-detail {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.mail-detail-header {
+    padding: 20px;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.mail-detail-subject {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-bottom: 8px;
+}
+
+.mail-detail-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mail-detail-sender {
+    font-size: 13px;
+    color: #1d1d1f;
+}
+
+.mail-detail-time {
+    font-size: 13px;
+    color: #6e6e73;
+}
+
+.mail-detail-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.mail-body {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1d1d1f;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+}
+
+.mail-body h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #1d1d1f;
+}
+
+.mail-body p {
+    margin-bottom: 16px;
+}
+
+.mail-body ul {
+    margin-bottom: 16px;
+    padding-left: 20px;
+}
+
+.mail-body li {
+    margin-bottom: 8px;
+}
+
+.mail-body strong {
+    font-weight: 600;
+}
+
+/* 响应式调整 */
+@media (max-width: 900px) {
+    .mail-sidebar {
+        width: 180px;
+    }
+
+    .mail-list {
+        width: 280px;
+    }
+}
